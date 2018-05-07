@@ -1,6 +1,0 @@
-﻿Pro spuštění je třeba stáhnout celou složku application.windows32/64 a .exe soubro spouštět z ní.
-Textová pole jsou plně funkční.
-Zmáčknutím mezerníku se objeví překážky, které rakety musí překonat. Opětovným zmáčknutím překážky zmizí.
-Pokud překážky nejsou zrovna vykresleny, je možne tahem myši nakreslit vlastní.
-Tlačítko s restartuje aplikaci a začne ukládat data do složky aplikace ve formátu měsíc/den/hodina/minuta.txt
-Chybí pouze okomentovat kod a zpřehlednit strukturu, což není momentálně podstatné.
