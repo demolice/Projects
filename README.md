@@ -1,7 +1,7 @@
 # Projects
-* JS
+* JS:
 Contains my basic JS projects
-* Processing
+* Processing:
 There you can find my Processing projects (language is similar to Java)
-* RP
+* RP:
 Ročníková práce
