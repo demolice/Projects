@@ -1,17 +1,25 @@
-var r1 = 200;
-var r2 = 200;
-var m1 = 40;
-var m2 = 40;
+/**
+ * More info about double pendulum: https://www.myphysicslab.com/pendulum/double-pendulum-en.html
+ */
+
+var r1 = 150; // Lenght of first stick
+var r2 = 100; // lenght of second stick
+
+var m1 = 20; // Mass of first ball
+var m2 = 20; //Mass of second ball
+
+// Angles (Theta)
 var a1 = Math.PI / 2;
 var a2 = Math.PI / 2;
+
+// Velocity of balls
 var a1_v = 0;
 var a2_v = 0;
-var g = 1;
 
-var px2 = -1;
-var py2 = -1;
+//Gravity
+var g = 0.7;
 
-var cx, cy;
+var cx, cy; //Starting point
 
 var pathX = [];
 var pathY = [];
@@ -28,8 +36,6 @@ function setup() {
 function draw() {
   background(0, 0, 13);
 
-
-
   var num1 = -g * (2 * m1 + m2) * sin(a1);
   var num2 = -m2 * g * sin(a1 - 2 * a2);
   var num3 = -2 * sin(a1 - a2) * m2;
@@ -44,23 +50,11 @@ function draw() {
   den = r2 * (2 * m1 + m2 - m2 * cos(2 * a1 - 2 * a2));
   var a2_a = (num1 * (num2 + num3 + num4)) / den;
 
-
-  translate(cx, cy);
-
   var x1 = r1 * sin(a1);
   var y1 = r1 * cos(a1);
 
   var x2 = x1 + r2 * sin(a2);
   var y2 = y1 + r2 * cos(a2);
-
-  fill(255);
-  stroke(255);
-
-  line(0, 0, x1, y1);
-  ellipse(x1, y1, m1, m1);
-
-  line(x1, y1, x2, y2);
-  ellipse(x2, y2, m2, m2);
 
   a1_v += a1_a;
   a2_v += a2_a;
@@ -70,6 +64,9 @@ function draw() {
   pathX.push(x2);
   pathY.push(y2);
 
+  translate(cx, cy);
+
+  // Tracking
   beginShape();
 
   noFill();
@@ -80,4 +77,15 @@ function draw() {
   }
 
   endShape();
+
+
+  // Drawing sticks and balls
+  fill(255);
+  stroke(255);
+
+  line(0, 0, x1, y1);
+  ellipse(x1, y1, m1, m1);
+
+  line(x1, y1, x2, y2);
+  ellipse(x2, y2, m2, m2);
 }
