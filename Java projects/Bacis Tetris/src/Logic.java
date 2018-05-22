@@ -10,27 +10,29 @@ import javax.swing.JOptionPane;
  */
 /**
  * Logic sturcture of the game
+ *
  * @author Daniil
  */
 class Logic {
 
-    private boolean[][] grid; // Contains info about used blocks
-    private Color[][] gridColors; // Grid that contains info about color of used blocks
+    private static boolean[][] grid; // Contains info about used blocks
+    private static Color[][] gridColors; // Grid that contains info about color of used blocks
 
     private Particle p; //The current particle that is being used
 
-    private Random r = new Random();
+    private static Random r;
 
     private final char[] types = {'S', 'L', 'O', 'T', 'I', 'Z'};
 
-    private double points = 0;
+    private static double points = 0;
 
-    private boolean timer = false;
+    private static boolean timer = false;
 
     Logic() {
-        grid = new boolean[Main.WCOUNT][Main.HCOUNT];
-        gridColors = new Color[Main.WCOUNT][Main.HCOUNT];
-        p = generateParticle();
+        this.r = new Random();
+        this.grid = new boolean[Main.WCOUNT][Main.HCOUNT];
+        this.gridColors = new Color[Main.WCOUNT][Main.HCOUNT];
+        this.p = generateParticle();
     }
 
     /**
@@ -45,7 +47,24 @@ class Logic {
         } else {
             death();
             p = generateParticle();
+            
+            ;
+            
+            if (generatedOnTop()) {
+                killGame();
+            }
         }
+    }
+    
+    private boolean generatedOnTop() {
+        for (int x = 0; x < p.getT().getShape().length; x++) {
+            for (int y = 0; y < p.getT().getShape()[x].length; y++) {
+                if (grid[p.getX() + x][p.getY() + y] && p.getT().getShape()[x][y]){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -65,8 +84,10 @@ class Logic {
         }
 
     }
+
     /**
      * Checks the collision with lower layer
+     *
      * @return true if there is a collision between particle and used boxes
      */
     private boolean collision() {
@@ -94,11 +115,15 @@ class Logic {
     private void endGame() {
         for (int i = 0; i < Main.WCOUNT; i++) {
             if (grid[i][0]) {
-                JOptionPane.showMessageDialog(null, "You lose", "End",
-                        JOptionPane.INFORMATION_MESSAGE);
-                System.exit(0);
+                killGame();
             }
         }
+    }
+
+    private void killGame() {
+        JOptionPane.showMessageDialog(null, "You lose", "End",
+                JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
 
     /**
@@ -186,11 +211,15 @@ class Logic {
         }
 
         temp.setC(c);
+        
+        
+        
         return temp;
     }
-    
+
     /**
-     * Moves the particle 
+     * Moves the particle
+     *
      * @param s name of an arrow that is being pressed
      */
     public void rotate(String s) {
@@ -247,7 +276,7 @@ class Logic {
 
         }
     }
-    
+
     /**
      * Rotates particle by own axis
      */

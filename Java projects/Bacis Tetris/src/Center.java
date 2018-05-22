@@ -79,6 +79,7 @@ class Center extends JPanel {
         boolean[][] grid = l.getGrid();
         Color[][] gridColor = l.getColorGrid();
         Particle p = l.getParticle();
+        
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
