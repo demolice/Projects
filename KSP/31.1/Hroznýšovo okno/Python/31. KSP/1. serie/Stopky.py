@@ -25,10 +25,10 @@ class Stopky(QWidget):
         self.buttonStop = QPushButton(self, text="Stop")
         self.buttonStop.clicked.connect(self.stop)
 
-        self.buttonUp = QPushButton(self, text="+0,1")
+        self.buttonUp = QPushButton(self, text="*10")
         self.buttonUp.clicked.connect(self.higherStep)
 
-        self.buttonDonw = QPushButton(self, text="-0,1")
+        self.buttonDonw = QPushButton(self, text="/10")
         self.buttonDonw.clicked.connect(self.lowerStep)
 
 	# Umístění ovládacích prvků
@@ -59,22 +59,23 @@ class Stopky(QWidget):
         self.timer.stop()
 
     def higherStep(self):
+        self.updateTimer
         self.step *= 10
-        self.tick
+        self.timer.start(self.step)
         self.updateLabel
 
     def lowerStep(self):
+        self.updateTimer
         self.step /= 10
-        self.tick
+        self.timer.start(self.step)
         self.updateLabel
 
     def updateTimer(self):
         self.timer.stop()
-        self.timer.start(self.step)
+        self.elapsed += self.step
 
     def tick(self):
 	# Uplynula další sekunda
-        self.timer.stop()
         self.elapsed += self.step
         self.updateLabel()
         self.timer.start(self.step)

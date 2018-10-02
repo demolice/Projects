@@ -16,7 +16,7 @@ timer = QTimer(singleShot=True)
 timer.timeout.connect(timeEvent)
 timer.start(2000)
 
-timer2 = QTimer(singleShot=False)
+timer2 = QTimer(singleShot=True)
 timer2.timeout.connect(box.close)
 
 app.exec_()
