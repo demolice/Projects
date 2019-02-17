@@ -27,7 +27,7 @@ function draw() {
     for (var j = 0; j < 1; j++) {
       //fill(map(h, 0, 10, 0, 100), 80, 28);
       let a = angle + offset;
-      let h = map(cos(a), -1, 1, 0, 200);
+      let h = map(sin(a), -1, 1, 0, 200);
       fill(map(h, 0, 200, 100, 1), 80, 28);
       noStroke();
       //rect(i * sW + sW / 2, j * sH + sH / 2, sW - 1, h);
